@@ -1,6 +1,8 @@
 
 #include "CUnit.h"
 
+bool mem_track = false;
+
 int try(const char *test, const char* detail, DataStruct rec, DataStruct exp)
 {
     uint32_t count = 1;
@@ -36,4 +38,14 @@ void results(const uint32_t result)
     dprintf(1, "\t\t✅ Passed: %u", passed);
     dprintf(1, "\t❌ Failed: %u", failed);
     dprintf(1, "\t📊 Total:  %u\n", total);
+}
+
+void mem_track_on(void)
+{
+    mem_track = true;
+}
+
+void mem_track_off(void)
+{
+	mem_track = false;
 }
