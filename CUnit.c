@@ -2,7 +2,7 @@
 #include "../include/ft_ping.h"
 #include "CUnit.h"
 
-int datacmp(DataStruct d1, DataStruct d2)
+int datacmp(const DataStruct d1, const DataStruct d2)
 {
     if (d1.type == d2.type)
     {
@@ -19,7 +19,7 @@ int datacmp(DataStruct d1, DataStruct d2)
     return (1);
 }
 
-int try(char *test, DataStruct rec, DataStruct exp)
+int try(const char *test, const char* detail, DataStruct rec, DataStruct exp)
 {
     uint32_t count = 1;
 
@@ -27,7 +27,10 @@ int try(char *test, DataStruct rec, DataStruct exp)
         return count;
 
     dprintf(1, "\n\033[1;31m[FAILED]\033[0m "); // Bold Red
-    dprintf(1, "\033[1;37mTest:\033[0m \"%s\"\n", test); // White
+    dprintf(1, "\033[1;37mTest:\033[0m "); // White
+    if (detail)
+        dprintf(1, "%s ", detail);
+    dprintf(1, "\"%s\"\n", test);
 
     dprintf(1, "  🔹 Expected: ");
     exp.print(&exp);
@@ -41,7 +44,7 @@ int try(char *test, DataStruct rec, DataStruct exp)
     return count;
 }
 
-void results(uint32_t result)
+void results(const uint32_t result)
 {
     uint16_t passed = (result & I_MASK) - ((result >> J_SHIFT) & I_MASK);
     uint16_t total  = result & I_MASK;
@@ -118,5 +121,7 @@ DataStruct set_bool(bool value)
 int main(void)
 {
     is_opt_test();
+    dprintf(1, "\n");
+    get_opt_test();
     return 0;
 }

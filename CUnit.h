@@ -34,9 +34,10 @@ DataStruct set_char(char value);
 DataStruct set_string(char *value);
 DataStruct set_bool(bool value);
 
-int datacmp(DataStruct d1, DataStruct d2);
-int try(char *test, DataStruct rec, DataStruct exp);
-void results(uint32_t result);
+int datacmp(const DataStruct d1, const DataStruct d2);
+int try(const char *test, const char* detail, const DataStruct rec, const DataStruct exp);
+void results(const uint32_t result);
 
 void is_opt_test(void);
+void get_opt_test(void);
 
